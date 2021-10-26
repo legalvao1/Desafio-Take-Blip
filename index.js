@@ -8,15 +8,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 function compare(a,b) {
-    // console.log( new Date(a.updated_at));
     return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
 }
 
-app.get('/', async (req, res) => {
+app.get('/', async (_req, res) => {
 
     const api = await axios.get('https://api.github.com/orgs/takenet/repos')
     const repositoriosC = api.data.filter((repo) => repo.language === 'C#');
     const orderByCreatedDate = repositoriosC.sort(compare).slice(0,5);
+    
     res.status(200).json({...orderByCreatedDate})
 });
 
