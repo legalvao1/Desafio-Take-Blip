@@ -17,8 +17,7 @@ app.get('/', async (req, res) => {
     const api = await axios.get('https://api.github.com/orgs/takenet/repos')
     const repositoriosC = api.data.filter((repo) => repo.language === 'C#');
     const orderByCreatedDate = repositoriosC.sort(compare).slice(0,5);
-    // console.log(orderByCreatedDate)
-    res.status(200).json(orderByCreatedDate)
+    res.status(200).json({...orderByCreatedDate})
 });
 
 app.listen(PORT, () => console.log(`ouvindo porta ${PORT}!`));
