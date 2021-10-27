@@ -1,13 +1,13 @@
-# Desafio Take Blip 🏆
+# Desafio Take Blip
 
--   Chatbot com fluxo conversacional com API intermediária integrando a Api do Github para visualização de repositórios específicos.
+-   Construir um  chatbot com fluxo conversacional na plataforma da Take Blip, desenvolvendo uma API intermediária para fazer integração com  a Api do Github para visualização de repositórios específicos.
 
-## Pre requisitos para rodar o projeto  ❗
+## Pre requisitos para rodar o projeto
 
 -   Visual Studio Code
 -   Node.js
 
-## Tecnologias Implementadas  ⚙
+## Tecnologias Utilizadas  ⚙
 
 -   Node.js
 -   Express
