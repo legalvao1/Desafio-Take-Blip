@@ -8,16 +8,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 function compare(a,b) {
-    return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+  return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
 }
 
 app.get('/', async (_req, res) => {
-
-    const api = await axios.get('https://api.github.com/orgs/takenet/repos')
+  try {
+    const api = await axios.get('https://api.github.com/orgs/takenet/repos');
     const repositoriosC = api.data.filter((repo) => repo.language === 'C#');
     const orderByCreatedDate = repositoriosC.sort(compare).slice(0,5);
     
-    res.status(200).json({...orderByCreatedDate})
+    res.status(200).json({...orderByCreatedDate});
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 app.listen(PORT, () => console.log(`ouvindo porta ${PORT}!`));
