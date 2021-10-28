@@ -2,7 +2,7 @@
 
 -   Construir um  chatbot com fluxo conversacional na plataforma da Take Blip, desenvolvendo uma API intermediária para fazer integração com  a Api do Github para visualização de repositórios específicos.
 
-## Pre requisitos para rodar o projeto
+## Pré requisitos para rodar o projeto
 
 -   Visual Studio Code
 -   Node.js
