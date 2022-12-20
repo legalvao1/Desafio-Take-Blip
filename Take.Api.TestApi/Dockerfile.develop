@@ -1,0 +1,20 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0
+ARG BUILD_CONFIGURATION=Debug
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+EXPOSE 80
+
+WORKDIR /src
+COPY ["Take.Api.TestApi.Facades/Take.Api.TestApi.Facades.csproj", "Take.Api.TestApi.Facades/"]
+COPY ["Take.Api.TestApi.Models/Take.Api.TestApi.Models.csproj", "Take.Api.TestApi.Models/"]
+COPY ["Take.Api.TestApi.Services/Take.Api.TestApi.Services.csproj", "Take.Api.TestApi.Services/"]
+COPY ["Take.Api.TestApi/Take.Api.TestApi.csproj", "Take.Api.TestApi/"]
+
+RUN dotnet restore "Take.Api.TestApi/Take.Api.TestApi.csproj"
+COPY . .
+WORKDIR "/src/Take.Api.TestApi"
+RUN dotnet build --no-restore "Take.Api.TestApi.csproj" -c $BUILD_CONFIGURATION
+
+RUN echo "exec dotnet run --no-build --no-launch-profile -c $BUILD_CONFIGURATION --" > /entrypoint.sh
+
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
